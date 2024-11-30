@@ -18,3 +18,10 @@ def mask_account_card(card_or_account: str) -> str:
             continue
     result = " ".join(card_or_account_list_new)
     return result
+
+
+def get_date(unformatted_date: str) -> str:
+    """Функция принимает на вход строку с датой в формате '2024-03-11T02:26:18.671407' и возвращает строку с датой в
+    формате 'ДД.ММ.ГГГГ'"""
+    result = f"{unformatted_date[8:10]}.{unformatted_date[5:7]}.{unformatted_date[:4]}"
+    return result
