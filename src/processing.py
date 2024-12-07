@@ -1,7 +1,7 @@
-def filter_by_state(list_of_dicts: list, chosen_state: str='EXECUTED') -> list:
+def filter_by_state(list_of_dicts: list, chosen_state: str = "EXECUTED") -> list:
     """Функция принимает список словарей и опционально значение для ключа state (по умолчанию
-'EXECUTED') и возвращает новый список словарей, содержащий только те словари, у которых ключ
-state соответствует указанному значению."""
+    'EXECUTED') и возвращает новый список словарей, содержащий только те словари, у которых ключ
+    state соответствует указанному значению."""
     new_list_of_dicts = []
     for dictionary in list_of_dicts:
         if dictionary.get("state") == chosen_state:
@@ -9,8 +9,8 @@ state соответствует указанному значению."""
     return new_list_of_dicts
 
 
-def sort_by_date(list_of_dicts: list, sort_order_is_reverse: bool=True) -> list:
+def sort_by_date(list_of_dicts: list, sort_order_is_reverse: bool = True) -> list:
     """Функция принимает список словарей и необязательный параметр, задающий порядок сортировки
     (по умолчанию — убывание) и возвращает новый список, отсортированный по дате (date)."""
-    sorted_list = sorted(list_of_dicts, key = lambda x: x["date"], reverse = sort_order_is_reverse)
+    sorted_list = sorted(list_of_dicts, key=lambda x: x["date"], reverse=sort_order_is_reverse)
     return sorted_list
