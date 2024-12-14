@@ -4,7 +4,7 @@ def get_mask_card_number(card_number: str) -> str:
     try:
         card_number_int = int(card_number)
     except ValueError:
-        result = "Ошибка. Номер карты может содержать только цифры."
+        result = "Ошибка. Номер карты может содержать только цифры и не может быть пустым."
     else:
         card_number_string = str(card_number_int)
         if len(card_number_string) == 16:
@@ -28,3 +28,4 @@ def get_mask_account(account_number: str) -> str:
         else:
             result = "Ошибка. Номер карты должен состоять из 20 цифр"
     return result
+
