@@ -1,4 +1,4 @@
-def filter_by_state(list_of_dicts: list, chosen_state: str = "EXECUTED") -> list:
+def filter_by_state(list_of_dicts: list, chosen_state: str = "EXECUTED") -> list | str:
     """Функция принимает список словарей и опционально значение для ключа state (по умолчанию
     'EXECUTED') и возвращает новый список словарей, содержащий только те словари, у которых ключ
     state соответствует указанному значению."""
@@ -6,7 +6,11 @@ def filter_by_state(list_of_dicts: list, chosen_state: str = "EXECUTED") -> list
     for dictionary in list_of_dicts:
         if dictionary.get("state") == chosen_state:
             new_list_of_dicts.append(dictionary)
-    return new_list_of_dicts
+    if not new_list_of_dicts:
+        result = "Нет результатов, удовлетворяющих заданным критериям"
+    else:
+        result = new_list_of_dicts
+    return result
 
 
 def sort_by_date(list_of_dicts: list, is_reverse: bool = True) -> list:
