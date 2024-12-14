@@ -5,6 +5,12 @@ def mask_account_card(card_or_account: str) -> str:
     """Функция принимает строку, содержащую тип и номер карты или счета и возвращает ее же в замаскированном виде"""
     card_or_account_list = card_or_account.split(" ")
     card_or_account_list_new = []
+    acceptable_words = ["Visa", "Maestro", "MasterCard", "Classic", "Gold", "Platinum", "Signature", "Infinite", "Счет"]
+    if (not 2 <= len(card_or_account_list) <= 3 or not card_or_account_list[0] in acceptable_words
+        or not card_or_account_list[-1].isdigit()):
+        raise ValueError("Введены неверные данные")
+    if len(card_or_account_list[-1]) != 16 or len(card_or_account_list[-1]) != 20:
+        raise ValueError("Введены неверные данные")
     for el in card_or_account_list:
         if el.isdigit() and len(el) == 16:
             masked_card_number = get_mask_card_number(el)
@@ -12,7 +18,7 @@ def mask_account_card(card_or_account: str) -> str:
         elif el.isdigit() and len(el) == 20:
             masked_account_number = get_mask_account(el)
             card_or_account_list_new.append(masked_account_number)
-        elif el.isalpha():
+        elif el.isalpha() and el in acceptable_words:
             card_or_account_list_new.append(el)
         else:
             continue
