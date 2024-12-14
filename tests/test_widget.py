@@ -1,6 +1,6 @@
 import pytest
 
-from src.widget import mask_account_card
+from src.widget import mask_account_card, get_date
 
 
 @pytest.mark.parametrize("card_or_account, expected", [("Maestro 1596837868705199", "Maestro 1596 83** **** 5199"),
@@ -22,3 +22,15 @@ def test_mask_account_card(card_or_account, expected):
 def test_mask_account_card_wrong_format(card_or_account_wrong_format):
     with pytest.raises(ValueError):
         mask_account_card(card_or_account_wrong_format)
+
+@pytest.mark.parametrize("unformatted_date, expected", [("2019-07-03T18:35:29.512364", "03.07.2019"),
+                                                        ("2018-06-30T02:08:58.425572", "30.06.2018"),
+                                                        ("2018-09-12T21:27:25.241689", "12.09.2018")])
+def test_get_date(unformatted_date, expected):
+    assert get_date(unformatted_date) == expected
+
+@pytest.mark.parametrize("incorrect_input", ["T18:35:29.512364", "2018-06T02:08:58.425572",
+                                             "9999-99-99T21:27:25.241689"])
+def test_get_date_incorrect_input(incorrect_input):
+    with pytest.raises(ValueError):
+        get_date(incorrect_input)
