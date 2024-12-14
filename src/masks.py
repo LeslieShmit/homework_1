@@ -28,4 +28,3 @@ def get_mask_account(account_number: str) -> str:
         else:
             result = "Ошибка. Номер счета должен состоять из 20 цифр"
     return result
-
