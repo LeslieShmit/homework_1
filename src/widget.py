@@ -19,8 +19,7 @@ def mask_account_card(card_or_account: str) -> str:
                 card_or_account_list_new.append(masked_account_number)
             elif el.isalpha() and el in acceptable_words:
                 card_or_account_list_new.append(el)
-            else:
-                continue
+
     else:
         raise ValueError("Введены неверные данные")
     result = " ".join(card_or_account_list_new)
