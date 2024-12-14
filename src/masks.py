@@ -20,12 +20,12 @@ def get_mask_account(account_number: str) -> str:
     try:
         account_number_int = int(account_number)
     except ValueError:
-        result = "Ошибка. Номер счета может содержать только цифры."
+        result = "Ошибка. Номер счета может содержать только цифры и не может быть пустым."
     else:
         account_number_string = str(account_number_int)
         if len(account_number_string) == 20:
             result = f"**{account_number_string[-4:]}"
         else:
-            result = "Ошибка. Номер карты должен состоять из 20 цифр"
+            result = "Ошибка. Номер счета должен состоять из 20 цифр"
     return result
 
