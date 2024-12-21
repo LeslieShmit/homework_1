@@ -16,7 +16,7 @@ def filter_by_currency(list_of_operations: list[dict], currency: str) -> Iterabl
     return filtered_data
 
 
-def transaction_descriptions(list_of_operations: list[dict]) -> str:
+def transaction_descriptions(list_of_operations: list[dict]) -> Iterable:
     """Функция принимает список словарей с транзакциями и возвращает описание каждой операции по очереди"""
     for dictionary in list_of_operations:
         try:
@@ -29,7 +29,7 @@ def transaction_descriptions(list_of_operations: list[dict]) -> str:
         pass  # pragma: no cover
 
 
-def card_number_generator(start: int, end: int) -> str:
+def card_number_generator(start: int, end: int) -> Iterable:
     """Функция генерирует номера банковских карт в формате XXXX XXXX XXXX XXXX, где X
     — цифра номера карты. Генератор может сгенерировать номера карт в заданном диапазоне
     от 0000 0000 0000 0001 до 9999 9999 9999 9999."""
