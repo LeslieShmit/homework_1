@@ -62,3 +62,7 @@ def test_filter_by_currency_no_valid_data(transactions_no_valid_currency):
     result = list(filter_by_currency(transactions_no_valid_currency, "USD"))
     assert expected_result == result
 
+def test_filter_by_currency_empty_list():
+    expected_result = []
+    result = list(filter_by_currency([], "USD"))
+    assert expected_result == result
