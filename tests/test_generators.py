@@ -102,9 +102,9 @@ def test_card_number_generator_start_more_than_end():
 
 
 @pytest.mark.parametrize(
-    "start, end", [(-1, 5), (-5, 0), (9999999999999995, 10000000000000000), (10000000000000000, 10000000000000005)]
+    "start, stop", [(-1, 5), (-5, 0), (9999999999999995, 10000000000000000), (10000000000000000, 10000000000000005)]
 )
-def test_card_number_generator_unexpected_value(start, end):
+def test_card_number_generator_unexpected_value(start, stop):
     with pytest.raises(ValueError) as exc_info:
-        next(card_number_generator(start, end))
+        next(card_number_generator(start, stop))
     assert str(exc_info.value) == "Ошибка. Оба значения должны находиться в диапазоне от 1 до 9999999999999999"
