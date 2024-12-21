@@ -1,8 +1,6 @@
-from collections.abc import generator
-
 import pytest
 
-from src.generators import filter_by_currency, transaction_descriptions
+from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
 
 
 def test_filter_by_currency(transactions):
@@ -106,3 +104,23 @@ def test_transaction_descriptions_unexpected(transactions_not_valid_description)
     assert next(generator) == "Перевод со счета на счет"
     assert next(generator) == "Перевод с карты на карту"
     assert next(generator) == "Перевод организации"
+
+def test_card_number_generator():
+    generator = card_number_generator(1, 5)
+    assert next(generator) == "0000 0000 0000 0001"
+    assert next(generator) == "0000 0000 0000 0002"
+    assert next(generator) == "0000 0000 0000 0003"
+    assert next(generator) == "0000 0000 0000 0004"
+    assert next(generator) == "0000 0000 0000 0005"
+
+def test_card_number_generator_start_more_than_end():
+    with pytest.raises(ValueError) as exc_info:
+        next(card_number_generator(5, 1))
+    assert str(exc_info.value) == "Ошибка. Начальное значение больше конечного"
+
+@pytest.mark.parametrize("start, end", [(-1, 5), (-5, 0), (9999999999999995, 10000000000000000),
+                                        (10000000000000000, 10000000000000005)])
+def test_card_number_generator_unexpected_value(start, end):
+    with pytest.raises(ValueError) as exc_info:
+        next(card_number_generator(start, end))
+    assert str(exc_info.value) == "Ошибка. Оба значения должны находиться в диапазоне от 1 до 9999999999999999"

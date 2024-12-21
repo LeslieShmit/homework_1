@@ -25,3 +25,19 @@ def transaction_descriptions(list_of_operations: list[dict]) -> str:
         yield operation["description"]
     while True:  # pragma: no cover
             pass  # pragma: no cover
+
+
+def card_number_generator(start: int, end: int) -> str:
+    """Функция генерирует номера банковских карт в формате XXXX XXXX XXXX XXXX, где X
+ — цифра номера карты. Генератор может сгенерировать номера карт в заданном диапазоне
+ от 0000 0000 0000 0001 до 9999 9999 9999 9999."""
+    if start > end:
+        raise ValueError("Ошибка. Начальное значение больше конечного")
+    if start > 9999999999999999 or end > 9999999999999999:
+        raise ValueError("Ошибка. Оба значения должны находиться в диапазоне от 1 до 9999999999999999")
+    if start <= 0 or end <= 0:
+        raise ValueError("Ошибка. Оба значения должны находиться в диапазоне от 1 до 9999999999999999")
+    for i in range(start, end + 1):
+        count_0 = "0" * (16 - len(str(i)))
+        number = count_0 + str(i)
+        yield f"{number[:4]} {number[4:8]} {number[8:12]} {number[12:]}"
