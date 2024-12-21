@@ -1,6 +1,8 @@
+from collections.abc import generator
+
 import pytest
 
-from src.generators import filter_by_currency
+from src.generators import filter_by_currency, transaction_descriptions
 
 
 def test_filter_by_currency(transactions):
@@ -89,3 +91,18 @@ def test_filter_by_currency_some_not_valid_data(transactions_some_not_valid_curr
     )
     result = list(filter_by_currency(transactions_some_not_valid_currency, "USD"))
     assert expected_result == result
+
+def test_transaction_descriptions(transactions):
+    generator = transaction_descriptions(transactions)
+    assert next(generator) == "Перевод организации"
+    assert next(generator) == "Перевод со счета на счет"
+    assert next(generator) == "Перевод со счета на счет"
+    assert next(generator) == "Перевод с карты на карту"
+    assert next(generator) == "Перевод организации"
+
+def test_transaction_descriptions_unexpected(transactions_not_valid_description):
+    generator = transaction_descriptions(transactions_not_valid_description)
+    assert next(generator) == "Перевод организации"
+    assert next(generator) == "Перевод со счета на счет"
+    assert next(generator) == "Перевод с карты на карту"
+    assert next(generator) == "Перевод организации"
