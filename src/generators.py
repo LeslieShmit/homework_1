@@ -8,9 +8,10 @@ def filter_by_currency(list_of_operations: list[dict], currency: str) -> Iterabl
         for dictionary in list_of_operations:
             value = dictionary["operationAmount"]["currency"]["code"]  # noqa: F841
     except KeyError:
-        filtered_data = []
-    else:
-        filtered_data = filter(
+        list_of_operations.remove(dictionary)  # noqa
+
+    filtered_data = filter(
             lambda operation: operation["operationAmount"]["currency"]["code"] == currency, list_of_operations
         )
     return filtered_data
+
