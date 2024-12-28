@@ -1,13 +1,14 @@
 import os.path
-
-from typing import Callable, Any
+from typing import Any, Callable
 
 from config import path
 
-def log(filename: str | bool=None) -> Callable:
+
+def log(filename: str | None = None) -> Callable:
     """Декоратор принимает название файла в формате 'name.txt', и записывает в него результаты или возникшие ошибки.
     Если имя файла не задано - логи выводятся в консоль."""
-    def inner(func: Callable):
+
+    def inner(func: Callable) -> Callable:
         def wrapper(*args: Any, **kwargs: Any) -> Any:
             global log
             result = None
@@ -25,5 +26,7 @@ def log(filename: str | bool=None) -> Callable:
                 else:
                     print(log)
                     return result
+
         return wrapper
+
     return inner

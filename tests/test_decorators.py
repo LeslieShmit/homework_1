@@ -1,9 +1,8 @@
-import pytest
-
 import os
 
-from src.decorators import log
 from config import path
+from src.decorators import log
+
 
 def test_log_console_ok(capsys):
 
@@ -24,7 +23,10 @@ def test_log_console_error(capsys):
 
     example_func([], {})
     captured = capsys.readouterr()
-    assert captured.out == """example_func error: can only concatenate list (not "dict") to list. Inputs: ([], {}), {}\n"""
+    assert (
+        captured.out
+        == """example_func error: can only concatenate list (not "dict") to list. Inputs: ([], {}), {}\n"""
+    )
 
 
 def test_log_file_ok():
@@ -46,4 +48,6 @@ def test_log_file_error():
     example_func([], {})
     with open(os.path.join(path, "test.txt"), "r", encoding="utf-8") as f:
         data = f.read().split("\n")[:-1]
-        assert data[-1] == """example_func error: can only concatenate list (not "dict") to list. Inputs: ([], {}), {}"""
+        assert (
+            data[-1] == """example_func error: can only concatenate list (not "dict") to list. Inputs: ([], {}), {}"""
+        )
