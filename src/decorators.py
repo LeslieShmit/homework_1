@@ -14,13 +14,13 @@ def log(filename: str | bool=None) -> Callable:
             try:
                 result = func(*args, **kwargs)
             except Exception as e:
-                log = f"{func.__name__} error: {e}. Inputs: {args}, {kwargs}\n"
+                log = f"{func.__name__} error: {e}. Inputs: {args}, {kwargs}"
             else:
-                log = f"{func.__name__} ok\n"
+                log = f"{func.__name__} ok"
             finally:
                 if filename:
                     with open(os.path.join(path, filename), "a", encoding="utf-8") as f:
-                        f.write(log)
+                        f.write(f"{log}\n")
                         return result
                 else:
                     print(log)
