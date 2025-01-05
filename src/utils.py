@@ -11,6 +11,6 @@ def get_transactions_list(path_to_file: str) -> list[dict]:
         transaction_list = []
     except json.decoder.JSONDecodeError:
         transaction_list = []
-    if type(transaction_list) != list:
+    if type(transaction_list) is not list:
         transaction_list = []
     return transaction_list

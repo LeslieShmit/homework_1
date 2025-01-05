@@ -1,6 +1,8 @@
-import requests
 import os
+
+import requests
 from dotenv import load_dotenv
+
 
 def convertion_to_rubles(transaction: dict) -> float:
     """Функция принимает на вход транзакцию и возвращает сумму транзакции в рублях"""
@@ -13,9 +15,7 @@ def convertion_to_rubles(transaction: dict) -> float:
         amount_to_convert = transaction["operationAmount"]["amount"]
         url = f"https://api.apilayer.com/exchangerates_data/convert?to=RUB&from={currency}&amount={amount_to_convert}"
         payload = {}
-        headers = {
-            "apikey": api_key
-        }
+        headers = {"apikey": api_key}
         response = requests.request("GET", url, headers=headers, data=payload)
 
         result = response.json()
