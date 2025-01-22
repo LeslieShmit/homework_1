@@ -4,3 +4,5 @@ example_func ok
 example_func error: can only concatenate list (not "dict") to list. Inputs: ([], {}), {}
 example_func ok
 example_func error: can only concatenate list (not "dict") to list. Inputs: ([], {}), {}
+example_func ok
+example_func error: can only concatenate list (not "dict") to list. Inputs: ([], {}), {}
