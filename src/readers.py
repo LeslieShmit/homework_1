@@ -1,5 +1,4 @@
 import pandas as pd
-import csv
 
 
 def transaction_reader_csv(path_to_file: str) -> list[dict]:
@@ -7,6 +6,7 @@ def transaction_reader_csv(path_to_file: str) -> list[dict]:
     transaction_df = pd.read_csv(path_to_file, sep=";")
     transaction_list = transaction_df.to_dict("records")
     return transaction_list
+
 
 def transaction_reader_exel(path_to_file: str) -> list[dict]:
     """Функция принимает на вход путь до файла exel и возвращает содержимое в виде списка словарей."""
