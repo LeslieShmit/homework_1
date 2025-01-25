@@ -1,6 +1,6 @@
 from unittest.mock import mock_open, patch
 
-from src.utils import get_transactions_list
+from src.utils import get_transactions_list, transaction_filter
 
 
 def test_get_transactions_list():
@@ -26,3 +26,16 @@ def test_get_transactions_list_decoder_error():
 
 def test_get_transactions_list_file_not_found():
     assert get_transactions_list("../data/nonexistent.json") == []
+
+def test_transaction_filter(transactions):
+    expected_result = [{
+            "id": 895315941,
+            "state": "EXECUTED",
+            "date": "2018-08-19T04:27:37.904916",
+            "operationAmount": {"amount": "56883.54", "currency": {"name": "USD", "code": "USD"}},
+            "description": "Перевод с карты на карту",
+            "from": "Visa Classic 6831982476737658",
+            "to": "Visa Platinum 8990922113665229",
+        }]
+    result = list(transaction_filter(transactions, "перевод с карты"))
+    assert result == expected_result

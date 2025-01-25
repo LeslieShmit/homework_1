@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import re
 from logging import DEBUG
 
 logger = logging.getLogger("utils")
@@ -31,3 +32,12 @@ def get_transactions_list(path_to_file: str) -> list[dict]:
     if transaction_list:
         logger.info("Программа завершена успешно.")
     return transaction_list
+
+def transaction_filter(transaction_list: list[dict], request_string: str) -> list[dict]:
+    """Функция принимает список словарей с данными о банковских операциях и строку поиска, а возвращает список
+    словарей, у которых в описании есть данная строка."""
+    result = []
+    for transaction_dict in transaction_list:
+        if re.search(request_string, transaction_dict["description"], flags=re.IGNORECASE):
+            result.append(transaction_dict)
+    return result
