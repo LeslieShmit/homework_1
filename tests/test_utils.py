@@ -1,6 +1,6 @@
 from unittest.mock import mock_open, patch
 
-from src.utils import get_transactions_list, transaction_filter
+from src.utils import get_transactions_list, transaction_filter, transaction_counter_by_categories
 
 
 def test_get_transactions_list():
@@ -37,5 +37,10 @@ def test_transaction_filter(transactions):
             "from": "Visa Classic 6831982476737658",
             "to": "Visa Platinum 8990922113665229",
         }]
-    result = list(transaction_filter(transactions, "перевод с карты"))
+    result = transaction_filter(transactions, "перевод с карты")
     assert result == expected_result
+
+def test_transaction_counter_by_categories(transactions):
+    expected_result = {'Перевод организации': 2, 'Перевод с карты на карту': 1}
+    result = transaction_counter_by_categories(transactions, ["Перевод с карты на карту", "Перевод организации", "Международный перевод"])
+    assert expected_result == result

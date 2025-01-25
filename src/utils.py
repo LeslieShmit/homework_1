@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import re
+from collections import Counter
 from logging import DEBUG
 
 logger = logging.getLogger("utils")
@@ -41,3 +42,14 @@ def transaction_filter(transaction_list: list[dict], request_string: str) -> lis
         if re.search(request_string, transaction_dict["description"], flags=re.IGNORECASE):
             result.append(transaction_dict)
     return result
+
+def transaction_counter_by_categories(transaction_list: list[dict], categories: list[str]) -> dict:
+    """Функция список словарей с данными о банковских операциях и список категорий операций, и возвращает словарь,
+    в котором ключи — это названия категорий, а значения — это количество операций в каждой категории."""
+    # Фильтруем входящий список из словарей и создаем список, состоящий из категорий, соответствующих запросу.
+    list_of_categories = []
+    for transaction_dict in transaction_list:
+        if transaction_dict["description"] in categories:
+            list_of_categories.append(transaction_dict["description"])
+    result = Counter(list_of_categories)
+    return dict(result)
