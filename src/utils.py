@@ -31,4 +31,3 @@ def get_transactions_list(path_to_file: str) -> list[dict]:
     if transaction_list:
         logger.info("Программа завершена успешно.")
     return transaction_list
-
