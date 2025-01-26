@@ -7,7 +7,7 @@ def filter_by_state(list_of_dicts: list, chosen_state: str = "EXECUTED") -> list
         if dictionary.get("state") == chosen_state:
             new_list_of_dicts.append(dictionary)
     if not new_list_of_dicts:
-        result = "Нет результатов, удовлетворяющих заданным критериям"
+        result = []
     else:
         result = new_list_of_dicts
     return result

@@ -21,7 +21,7 @@ def get_mask_card_number(card_number: str) -> str:
         logger.error("Ошибка. Формат входящих данных некорректен.")
         result = "Ошибка. Номер карты может содержать только цифры и не может быть пустым."
     else:
-        card_number_string = str(card_number_int)
+        card_number_string = str(card_number)
         if len(card_number_string) == 16:
             logger.info("Программа завершена успешно.")
             result = f"{card_number_string[0: 4]} {card_number_string[4: 6]}** **** {card_number_string[-4:]}"
@@ -41,7 +41,7 @@ def get_mask_account(account_number: str) -> str:
         logger.error("Ошибка. Формат входящих данных некорректен.")
         result = "Ошибка. Номер счета может содержать только цифры и не может быть пустым."
     else:
-        account_number_string = str(account_number_int)
+        account_number_string = str(account_number)
         if len(account_number_string) == 20:
             logger.info("Программа завершена успешно.")
             result = f"**{account_number_string[-4:]}"
