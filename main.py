@@ -8,12 +8,14 @@ from src.widget import get_date, mask_account_card
 def main():
     """Основная функция, связывающая функциональности между собой и отвечающая за логику проекта"""
     while True:
-        print("""Привет! Добро пожаловать в программу работы 
+        print(
+            """Привет! Добро пожаловать в программу работы 
     с банковскими транзакциями. 
     Выберите необходимый пункт меню:
     1. Получить информацию о транзакциях из JSON-файла
     2. Получить информацию о транзакциях из CSV-файла
-    3. Получить информацию о транзакциях из XLSX-файла""")
+    3. Получить информацию о транзакциях из XLSX-файла"""
+        )
         user_input = input()
         if user_input == "1":
             print("Для обработки выбран JSON-файл.")
@@ -25,16 +27,20 @@ def main():
             transaction_list_unformatted = transaction_reader_csv("data/transactions.csv")
             transaction_list = []
             for transaction_dict_unformatted in transaction_list_unformatted:
-                transaction_dict_formatted = {"id": transaction_dict_unformatted["id"],
-                                              "state": transaction_dict_unformatted["state"],
-                                              "date": transaction_dict_unformatted["date"],
-                                              "operationAmount": {"amount": transaction_dict_unformatted["amount"],
-                                                                  "currency": {"name": transaction_dict_unformatted[
-                                                                      "currency_name"],
-                                                                               "code": transaction_dict_unformatted[
-                                                                                   "currency_code"]}},
-                                              "description": transaction_dict_unformatted["description"],
-                                              "to": transaction_dict_unformatted["to"]}
+                transaction_dict_formatted = {
+                    "id": transaction_dict_unformatted["id"],
+                    "state": transaction_dict_unformatted["state"],
+                    "date": transaction_dict_unformatted["date"],
+                    "operationAmount": {
+                        "amount": transaction_dict_unformatted["amount"],
+                        "currency": {
+                            "name": transaction_dict_unformatted["currency_name"],
+                            "code": transaction_dict_unformatted["currency_code"],
+                        },
+                    },
+                    "description": transaction_dict_unformatted["description"],
+                    "to": transaction_dict_unformatted["to"],
+                }
                 if transaction_dict_unformatted["from"] != 0:
                     transaction_dict_formatted["from"] = transaction_dict_unformatted["from"]
                 transaction_list.append(transaction_dict_formatted)
@@ -45,16 +51,20 @@ def main():
             transaction_list_unformatted = transaction_reader_excel("data/transactions_excel.xlsx")
             transaction_list = []
             for transaction_dict_unformatted in transaction_list_unformatted:
-                transaction_dict_formatted = {"id": transaction_dict_unformatted["id"],
-                                              "state": transaction_dict_unformatted["state"],
-                                              "date": transaction_dict_unformatted["date"],
-                                              "operationAmount": {"amount": transaction_dict_unformatted["amount"],
-                                                                  "currency": {"name": transaction_dict_unformatted[
-                                                                      "currency_name"],
-                                                                               "code": transaction_dict_unformatted[
-                                                                                   "currency_code"]}},
-                                              "description": transaction_dict_unformatted["description"],
-                                              "to": transaction_dict_unformatted["to"]}
+                transaction_dict_formatted = {
+                    "id": transaction_dict_unformatted["id"],
+                    "state": transaction_dict_unformatted["state"],
+                    "date": transaction_dict_unformatted["date"],
+                    "operationAmount": {
+                        "amount": transaction_dict_unformatted["amount"],
+                        "currency": {
+                            "name": transaction_dict_unformatted["currency_name"],
+                            "code": transaction_dict_unformatted["currency_code"],
+                        },
+                    },
+                    "description": transaction_dict_unformatted["description"],
+                    "to": transaction_dict_unformatted["to"],
+                }
                 if transaction_dict_unformatted["from"] != 0:
                     transaction_dict_formatted["from"] = transaction_dict_unformatted["from"]
                 transaction_list.append(transaction_dict_formatted)
@@ -62,8 +72,10 @@ def main():
         else:
             print("Введенные данные некорректны. Введите число от 1 до 3.")
     while True:
-        print("""Введите статус, по которому необходимо выполнить фильтрацию. 
-Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING""")
+        print(
+            """Введите статус, по которому необходимо выполнить фильтрацию. 
+Доступные для фильтровки статусы: EXECUTED, CANCELED, PENDING"""
+        )
         user_input = input()
         if user_input.upper() == "EXECUTED":
             chosen_state = "EXECUTED"
@@ -129,15 +141,18 @@ def main():
                 formatted_date = get_date(transaction["date"])
                 masked_source = mask_account_card(transaction["from"])
                 masked_destination = mask_account_card(transaction["to"])
-                print(f"""{formatted_date} {transaction["description"]}
+                print(
+                    f"""{formatted_date} {transaction["description"]}
 {masked_source} -> {masked_destination}
-Сумма: {transaction["operationAmount"]["amount"]} {transaction["operationAmount"]["currency"]["name"]}""")
+Сумма: {transaction["operationAmount"]["amount"]} {transaction["operationAmount"]["currency"]["name"]}"""
+                )
             else:
                 formatted_date = get_date(transaction["date"])
                 masked_destination = mask_account_card(transaction["to"])
-                print(f"""{formatted_date} {transaction["description"]}
+                print(
+                    f"""{formatted_date} {transaction["description"]}
 {masked_destination}
-Сумма: {transaction["operationAmount"]["amount"]} {transaction["operationAmount"]["currency"]["name"]}""")
+Сумма: {transaction["operationAmount"]["amount"]} {transaction["operationAmount"]["currency"]["name"]}"""
+                )
     else:
         print("Не найдено ни одной транзакции, подходящей под ваши условия фильтрации")
-
