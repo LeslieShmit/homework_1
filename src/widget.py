@@ -19,7 +19,7 @@ def mask_account_card(card_or_account: str) -> str:
         "American",
         "Express",
         "Discover",
-        "Mastercard"
+        "Mastercard",
     ]
     if (
         not 2 <= len(card_or_account_list) <= 3
@@ -55,4 +55,3 @@ def get_date(unformatted_date: str) -> str:
         raise ValueError("Некорректная дата")
     result = f"{unformatted_date[8:10]}.{unformatted_date[5:7]}.{unformatted_date[:4]}"
     return result
-

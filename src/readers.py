@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def transaction_reader_csv(path_to_file: str) -> list[dict]:
     """Функция принимает на вход путь до файла .csv и возвращает содержимое в виде списка словарей."""
     transaction_df = pd.read_csv(path_to_file, sep=";")
