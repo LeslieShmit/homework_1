@@ -46,7 +46,7 @@ def test_filter_by_state_no_state_chosen(list_of_dicts):
 
 
 def test_filter_by_state_no_dicts_for_chosen_state(list_of_dicts):
-    assert filter_by_state(list_of_dicts, "FAILED") == "Нет результатов, удовлетворяющих заданным критериям"
+    assert filter_by_state(list_of_dicts, "FAILED") == []
 
 
 def test_sort_by_date(list_of_dicts):

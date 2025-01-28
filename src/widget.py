@@ -15,6 +15,11 @@ def mask_account_card(card_or_account: str) -> str:
         "Signature",
         "Infinite",
         "Счет",
+        "МИР",
+        "American",
+        "Express",
+        "Discover",
+        "Mastercard",
     ]
     if (
         not 2 <= len(card_or_account_list) <= 3
